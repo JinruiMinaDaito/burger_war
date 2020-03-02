@@ -94,7 +94,7 @@ class Move(smach.State):
             send_data = Twist()
             send_data.linear.x = -10
             self.pub_twist.publish(send_data)
-            rospy.sleep(1)
+            rospy.sleep(2)
         else:
             rospy.loginfo("Moving Failed [" + target_location_global + "].")
             overlaytext.publish("Moving Failed [" + target_location_global + "].")
