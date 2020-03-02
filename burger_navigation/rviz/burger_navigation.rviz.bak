@@ -351,36 +351,6 @@ Visualization Manager:
       Topic: /move_base/current_goal
       Unreliable: false
       Value: true
-    - Circles color: 170; 0; 0
-      Class: Obstacles
-      Enabled: true
-      Margin color: 0; 170; 0
-      Name: Obstacles
-      Opacity: 0.75
-      Segments color: 170; 170; 0
-      Segments thickness: 0.0299999993
-      Topic: /obstacles
-      Unreliable: false
-      Value: true
-    - Align Bottom: false
-      Background Alpha: 0.800000012
-      Background Color: 0; 0; 0
-      Class: jsk_rviz_plugin/OverlayText
-      Enabled: true
-      Foreground Alpha: 0.800000012
-      Foreground Color: 25; 255; 240
-      Name: OverlayText
-      Overtake Color Properties: true
-      Overtake Position Properties: true
-      Topic: /overlaytext
-      Value: true
-      font: DejaVu Sans Mono
-      height: 128
-      left: 10
-      line width: 2
-      text size: 20
-      top: 10
-      width: 600
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

@@ -2,18 +2,15 @@
 
 <launch>
   <!-- Arguments -->
-  <arg name="map_file"                default="$(find burger_navigation)/maps/map.yaml"/>
-  <arg name="map_movebase_file"       default="$(find burger_navigation)/maps/map_movebase.yaml"/>
-  <arg name="map_movebase_topic_name" default="map_movebase"/>
-  <arg name="open_rviz"               default="true"/>
-  <arg name="move_forward_only"       default="false"/>
-  <arg name="cmd_vel_topic"           default="cmd_vel" />
-  <arg name="cmd_vel_dummy_topic"     default="cmd_vel_dummy" />
-  <arg name="odom_topic"              default="odom" />
-  <arg name="scan_topic"              default="scan"/>
-  <arg name="initial_pose_x"          default="-1.4"/>
-  <arg name="initial_pose_y"          default="0.0"/>
-  <arg name="initial_pose_a"          default="0.0"/>
+  <arg name="map_file" default="$(find burger_navigation)/maps/map.yaml"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="false"/>
+  <arg name="cmd_vel_topic" default="cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+  <arg name="scan_topic"     default="scan"/>
+  <arg name="initial_pose_x" default="-1.3"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
 
   <!-- Turtlebot3 -->
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
@@ -22,12 +19,6 @@
 
   <!-- Map server -->
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)">
-  </node>
-
-  <!-- Map_move_base server -->
-  <node name="map_movebase_server" pkg="map_server" type="map_server" args="$(arg map_movebase_file)" >
-    <remap from="map" to="$(arg map_movebase_topic_name)" />
-    <remap from="static_map" to="static_map_movebase" />
   </node>
 
 
@@ -81,17 +72,18 @@
     <rosparam file="$(find burger_navigation)/param/dwa_local_planner_params_burger.yaml" command="load" />
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
-    <remap from="map" to="$(arg map_movebase_topic_name)" />
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
 
     <param name="local_costmap/global_frame"             value="odom"/>
     <param name="local_costmap/robot_base_frame"             value="base_link"/>
+    <param name="local_costmap/scan/sensor_frame"             value="base_scan"/>
     <param name="global_costmap/robot_base_frame"            value="base_link"/>
     <param name="global_costmap/global_frame"            value="map"/>
+    <param name="global_costmap/scan/sensor_frame"             value="base_scan"/>
   </node>
 
   <!-- rviz -->
-  <group if="$(arg open_rviz)">
+  <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find burger_navigation)/rviz/burger_navigation.rviz">
       <remap from="/move_base_simple/goal" to="move_base_simple/goal"/>
     </node>
