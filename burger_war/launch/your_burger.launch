@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="side" default="r"/> <!-- "b" = blue side, "r" = red side  -->
+    <arg name="side" default="r"/>
 
-    <!-- You can change control program  -->
+    <include file="$(find burger_navigation)/launch/burger_navigation.launch"/>
 
+    <!-- my program node -->
+    <node pkg="burger_war" type="burger_war_main.py" name="burger_war_main" output="screen"/>
 
-    <!-- sample program node -->
+    <node pkg="burger_war" type="enemy_detector.py" name="enemy_detector_node" output="screen"/>
 
-    <node pkg="burger_war" type="randomRun.py" name="randomRun" output="screen"/>
+    <include file="$(find burger_war)/launch/obstacle_detector.launch"/>
 
-    <!-- END sample program node -->
+    <node pkg="burger_war" type="scan_trimer.py" name="scan_trimer_node" output="screen"/>
 
-
-    <!-- End of your space  -->
 </launch>
-
