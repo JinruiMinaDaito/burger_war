@@ -5,7 +5,7 @@
     <include file="$(find burger_navigation)/launch/burger_navigation.launch"/>
 
     <!-- my program node -->
-    <node pkg="burger_war" type="burger_war_main.py" name="burger_war_main" output="screen"/>
+    <node pkg="burger_war" type="burger_war_main_ver2.py" name="burger_war_main" output="screen"/>
 
     <node pkg="burger_war" type="enemy_detector.py" name="enemy_detector_node" output="screen"/>
 
